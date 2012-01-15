@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery + CoffeeScript tutorial: animation stacking</title>
+    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+</head>
+
+<body>
+<style>
+    div.green-leaf div {border: 1px solid white; height: 38px; width: 38px; position: absolute}
+</style>
+
+<div class='green-leaf' style='background:  #458008; position: relative; width: 200px; height: 200px' >
+    <div id='ani2_bar0' style='background: #FF621D; left: 0; top:0'></div>
+    <div id='ani2_bar1' style='background: #B1D02C; left: 0; top:160px'></div>
+    <div id='ani2_bar2' style='background: #D5FA6F; left: 160px; top:160px'></div>
+    <div id='ani2_bar3' style='background: #89C128; left: 160px; top:0'></div>
+    <div id='ani2_bar4' style='background: #B42002; left: 80px; top:80px'></div>
+</div>
+
+<script type="text/coffeescript">
+$j = jQuery
+#Array comprehension, here it goes!
+bars = ($j "#ani2_bar#{n}" for n in [0..4])
+
+#Using CSS id selectors, kinda fast
+#elements = $j '[id*=ani2_bar]'
+#But has to be 'jQueryfied', every HTMLDivElement turned to a jQuery object
+#bars = ($j(elements.eq i) for i in [0..4])
+
+up = (bar) -> bar.animate(top: '-=40',height: 78).animate height: 38
+
+down = (bar) ->
+    bar.animate
+        height: 78
+    .animate
+        top: '+=40'
+        height: 38
+
+right = (bar) -> bar.animate(width: 78).animate left: '+=40', width: 38
+left = (bar) -> bar.animate(left: '-=40', width: 78).animate width: 38
+
+$j ->
+    left left up right right right down down down down bars[0]
+    right up up up left left up right right right bars[1]
+    down right right up up up left left up left bars[2]
+    up up left left down down right down left left bars[3]
+    down down down right right up up up left down bars[4]
+</script>
+
+</body>
+</html>
