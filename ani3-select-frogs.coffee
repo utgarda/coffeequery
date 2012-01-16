@@ -7,5 +7,3 @@ bars = ($j(elements.eq i) for i in [0..4])
 
 $j('#ani3_select').click ->
 	b.css('border-color', 'red') for b in bars
-$j('#ani3_reset1').click ->
-	b.css('border-color', 'white') for b in bars
