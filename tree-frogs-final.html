@@ -13,7 +13,9 @@
 $j = jQuery
 
 class Frog
-    constructor: (@obj) ->
+    constructor: ([color, left, top], leaf) ->
+        @obj = $j "<div style='background: #{color}; left: #{left}px; top:#{top}px; border: 1px solid white; height: 38px; width: 38px; position: absolute;'></div>"
+        @obj.appendTo leaf
     $aniArgs =
         u: [{top: '-=40', height: 78},{height: 38}]
         d: [{height: 78},{top: '+=40', height: 38}]
@@ -24,14 +26,10 @@ class Frog
         this
     move: (path) ->  this.jump(dir) for dir in path
 
-
-frogHtml = ([color, left, top]) ->
-    "<div style='border: 1px solid white; height: 38px; width: 38px; position: absolute; background: #{color}; left: #{left}px; top:#{top}px'></div>"
-
 leaf = $j '#green-leaf'
 
 #Array comprehension, here it goes!
-frogs = ( new Frog( $j( frogHtml( args ) ).appendTo leaf ) for args in [
+frogs = ( new Frog( params, leaf ) for params in [
     ['#FF621D', 0, 0]
     ['#B1D02C', 0, 160]
     ['#D5FA6F', 160, 160]
