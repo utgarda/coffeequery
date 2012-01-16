@@ -12,22 +12,30 @@
 </style>
 
 <div class='green-leaf' style='background:  #458008; position: relative; width: 200px; height: 200px' >
-    <div id='ani2_bar0' style='background: #FF621D; left: 0; top:0'></div>
-    <div id='ani2_bar1' style='background: #B1D02C; left: 0; top:160px'></div>
-    <div id='ani2_bar2' style='background: #D5FA6F; left: 160px; top:160px'></div>
-    <div id='ani2_bar3' style='background: #89C128; left: 160px; top:0'></div>
-    <div id='ani2_bar4' style='background: #B42002; left: 80px; top:80px'></div>
+    <div id='ani3_bar0' style='background: #FF621D; left: 0; top:0'></div>
+    <div id='ani3_bar1' style='background: #B1D02C; left: 0; top:160px'></div>
+    <div id='ani3_bar2' style='background: #D5FA6F; left: 160px; top:160px'></div>
+    <div id='ani3_bar3' style='background: #89C128; left: 160px; top:0'></div>
+    <div id='ani3_bar4' style='background: #B42002; left: 80px; top:80px'></div>
 </div>
+<input class='button' id='ani3_select' type='button' value='Select divs'>
+<input class='button' id='ani3_reset1' type='button' value='Reset'>
 
 <script type="text/coffeescript">
 $j = jQuery
-#Array comprehension, here it goes!
-bars = ($j "#ani2_bar#{n}" for n in [0..4])
 
-#Using CSS id selectors, kinda fast
-#elements = $j '[id*=ani2_bar]'
-#But has to be 'jQueryfied', every HTMLDivElement turned to a jQuery object
+#Array comprehension, here it goes!
+bars = ($j "#ani3_bar#{n}" for n in [0..4])
+
+#Or could be using CSS id selectors, kinda fast, but has to
+#be 'jQueryfied' for our needs, i.e. every HTMLDivElement turned to a jQuery object
+#elements = $j '[id*=ani3_bar]'
 #bars = ($j(elements.eq i) for i in [0..4])
+
+$j('#ani3_select').click ->
+    b.css('border-color', 'red') for b in bars
+$j('#ani3_reset1').click ->
+    b.css('border-color', 'white') for b in bars
 
 up = (bar) -> bar.animate(top: '-=40',height: 78).animate height: 38
 
