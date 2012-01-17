@@ -21,11 +21,23 @@
 <input class='button' id='ani3_select' type='button' value='Select divs'>
 <input class='button' id='ani3_reset1' type='button' value='Reset'>
 
+<div class='green-leaf' style='background:  #458008; position: relative; width: 200px; height: 200px' >
+    <div id='ani3_bar5' style='background: #FF621D; left: 0; top:0'></div>
+    <div id='ani3_bar6' style='background: #B1D02C; left: 0; top:160px'></div>
+    <div id='ani3_bar7' style='background: #D5FA6F; left: 160px; top:160px'></div>
+    <div id='ani3_bar8' style='background: #89C128; left: 160px; top:0'></div>
+    <div id='ani3_bar9' style='background: #B42002; left: 80px; top:80px'></div>
+</div>
+<input class='button' id='ani3_jump_around' type='button' value='Jump around'>
+<input class='button' id='ani3_reset2' type='button' value='Reset'>
+
+
 <script type="text/coffeescript">
 $j = jQuery
 
 #Array comprehension, here it goes!
 bars = ($j "#ani3_bar#{n}" for n in [0..4])
+bars2 = ($j "#ani3_bar#{n}" for n in [5..9])
 
 #Or could be using CSS id selectors, kinda fast, but has to
 #be 'jQueryfied' for our needs, i.e. every HTMLDivElement turned to a jQuery object
@@ -49,12 +61,17 @@ down = (bar) ->
 right = (bar) -> bar.animate(width: 78).animate left: '+=40', width: 38
 left = (bar) -> bar.animate(left: '-=40', width: 78).animate width: 38
 
+$j('#ani3_jump_around').click ->
+    left down right right up up left left down right bars2[4]
+$j('#ani3_reset2').click ->
+    bars2[4].stop(true, true).animate( left: 80, top:80, width:38, height:38 )
+
 $j ->
-    left left up right right right down down down down bars[0]
-    right up up up left left up right right right bars[1]
-    down right right up up up left left up left bars[2]
-    up up left left down down right down left left bars[3]
-    down down down right right up up up left down bars[4]
+#    left left up right right right down down down down bars[0]
+#    right up up up left left up right right right bars[1]
+#    down right right up up up left left up left bars[2]
+#    up up left left down down right down left left bars[3]
+#    down down down right right up up up left down bars[4]
 </script>
 
 </body>
