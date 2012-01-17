@@ -21,10 +21,14 @@ class Frog
         d: [{height: 78},{top: '+=40', height: 38}]
         l: [{left: '-=40', width: 78}, {width: 38}]
         r: [{width: 78}, {left: '+=40', width: 38}]
-    jump: (dir) ->
-        @obj = (@obj.animate( $aniArgs[dir][0] ).animate $aniArgs[dir][1])
+    jump: (dir, s) ->
+        @obj
+            .animate($aniArgs[dir][0])
+            .animate($aniArgs[dir][1]) for i in [1..s]
         this
-    move: (path) ->  this.jump(dir) for dir in path
+    right: (n) ->
+        jump 'r', n
+    move: (path) ->  this.jump(dir, 1) for dir in path
 
 leaf = $j '#green-leaf'
 
