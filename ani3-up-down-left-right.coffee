@@ -12,6 +12,6 @@ down = (bar) ->
 right = (bar) -> 
     bar.animate(width:78).animate left: '+=40', width:38
 # Or put all the brackets possible 
-№ (but that's not what CS is about ;)
+# (but that's not what CS is about ;)
 left = (bar) -> 
     bar.animate({left:'-=40',width:78}).animate({width:38})
