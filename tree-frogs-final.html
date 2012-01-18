@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jQuery + CoffeeScript tutorial: animation stacking</title>
-    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <title>jQuery + CoffeeScript tutorial: animation stacking
+    </title>
+    <script
+            src='http://coffeescript.org/extras/coffee-script.js'>
+    </script>
+    <script
+            src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/
+jquery.min.js'>
+    </script>
 </head>
 
 <body>
-<div id='green-leaf' style='background:  #458008; position: relative; width: 200px; height: 200px' ></div>
+<div id='green-leaf'
+     style='background:  #458008;
+     position: relative;
+     width: 200px;
+     height: 200px' ></div>
 
 <script type="text/coffeescript">
 $j = jQuery
 
 class Frog
     constructor: ([color, left, top], leaf) ->
-        @obj = $j "<div style='background: #{color}; left: #{left}px; top:#{top}px; border: 1px solid white; height: 38px; width: 38px; position: absolute;'></div>"
+        @obj = $j """<div style='background: #{color};
+        left: #{left}px;
+        top:#{top}px;
+        border: 1px solid white;
+        height: 38px; width: 38px; position: absolute;'></div>"""
         @obj.appendTo leaf
     $aniArgs =
         u: [{top: '-=40', height: 78},{height: 38}]
         d: [{height: 78},{top: '+=40', height: 38}]
         l: [{left: '-=40', width: 78}, {width: 38}]
         r: [{width: 78}, {left: '+=40', width: 38}]
-    jump: (dir, s) ->
+    move: (path) ->
         @obj
             .animate($aniArgs[dir][0])
-            .animate($aniArgs[dir][1]) for i in [1..s]
+            .animate($aniArgs[dir][1]) for dir in path
         this
-    right: (n) ->
-        jump 'r', n
-    move: (path) ->  this.jump(dir, 1) for dir in path
 
 leaf = $j '#green-leaf'
 
@@ -42,7 +53,12 @@ frogs = ( new Frog( params, leaf ) for params in [
 ])
 
 $j ->
-    frogs[i].move(path) for path, i in ['ddddrrrull', 'rrrulluuur', 'lulluuurrd', 'lldrddlluu', 'dluuurrddd']
+    frogs[i].move(path) for path, i in [
+        'ddddrrrull'
+        'rrrulluuur'
+        'lulluuurrd'
+        'lldrddlluu'
+        'dluuurrddd']
 </script>
 
 </body>
