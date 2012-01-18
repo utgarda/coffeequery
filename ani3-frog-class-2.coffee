@@ -21,7 +21,7 @@ class Frog
     up: (n) -> this.jump 'u', n
     down: (n) -> this.jump 'd', n
 
-frogs = ( new Frog( params, leaf ) for params in [
+frogs = ( new Frog( params, '#leaf' ) for params in [
     ['#FF621D', 0, 0]
     ['#B1D02C', 0, 160]
     ['#D5FA6F', 160, 160]
