@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>jQuery + CoffeeScript tutorial: animation stacking</title>
+<script src='http://coffeescript.org/extras/coffee-script.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+
+<style>
+    div.tree-frog {border: 1px solid white; height: 38px; width: 38px; position: absolute}
+</style>
+</head>
+
+<body>
+
+<div style='position: relative; width: 510px; height: 80px; background:  #458008'>
+    <div id='ani2_worm_bar' class = 'tree-frog' style='background: #FF621D; left: 20px; top:20px'></div>
+</div>
+<input class='button' id='ani2_go' type='button' value='Go'>
+<input class='button' id='ani2_reset1' type='button' value='Reset'>
+<br/>
+<div style='position: relative; width: 510px; height: 80px; background:  #458008'>
+    <div id='ani2_worm_bar2' class = 'tree-frog'  style='background: #FF621D; left: 20px; top:20px'></div>
+</div>
+<input class='button' id='ani2_gogo' type='button' value='Go Go'>
+<input class='button' id='ani2_reset2' type='button' value='Reset'>
+<br/>
+<div style='position: relative; width: 510px; height: 80px; background:  #458008'>
+    <div id='ani2_worm_bar3' class='tree-frog' style='background: #FF621D; left: 20px; top:20px'></div>
+</div>
+<input class='button' id='ani2_gogo_cat' type='button' value='Go Go Caterpillar!'>
+<input class='button' id='ani2_reset3' type='button' value='Reset'>
+<br/>
+<script type='text/coffeescript'>
+$j = jQuery
+
+$j('#ani2_go').click ->
+    $j('#ani2_worm_bar').animate(width:78).animate(left:'+=40',width:38)
+
+$j('#ani2_gogo').click ->
+    $j('#ani2_worm_bar2')
+        .animate(width:78).animate( left:'+=40', width:38)
+        .animate(width:78).animate( left:'+=40', width:38)
+
+go = (bar) ->
+    bar.animate(width:78).animate(left:'+=40',width:38)
+$j('#ani2_gogo_cat').click ->
+    go go go go go go go go go go go $j('#ani2_worm_bar3')
+
+reset = (bar) ->
+    bar.stop(true, true).animate( left: 20, width:38 )
+$j('#ani2_reset1').click -> reset $j('#ani2_worm_bar')
+$j('#ani2_reset2').click -> reset $j('#ani2_worm_bar2')
+$j('#ani2_reset3').click -> reset $j('#ani2_worm_bar3')
+</script>
+
+</body>
+</html>
