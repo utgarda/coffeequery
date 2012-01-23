@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+</head>
+<body>
+<div style="width: 510px; height: 80px">
+    <div id="ani1_bar1" style="background: #29AAE1; border: 1px solid white; height: 80px; width: 350px; float: left;"></div>
+    <div id="ani1_bar2" style="background: #333; border: 1px solid white; height: 80px; width: 150px; float: right;"></div>
+</div>
+<p>
+<input class="button" id="ani1_clickme" type="button" value="Click Me!">
+<input class="button" id="ani1_restore" type="button" value="Restore">
+
+<script type="text/coffeescript">
+#Using $j instead of just $ to be more specific
+$j = jQuery
+
+#Storing page elements to local variables
+clickme = $j '#ani1_clickme'
+restore = $j '#ani1_restore'
+bar1 = $j '#ani1_bar1'
+bar2 = $j '#ani1_bar2'
+
+#Cool shortcut, instead of "$j(document).ready(function() { "
+$j ->
+    clickme.click ->
+        bar1.animate {width:150}, 2000
+        bar2.animate {width:350}, 4000
+    restore.click ->
+        bar1.animate {width:350}, 4000
+        bar2.animate {width:150}, 2000
+</script>
+</body>
+</html>
