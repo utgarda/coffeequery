@@ -4,7 +4,8 @@ class Frog
         left: #{left}px;
         top:#{top}px;
         border: 1px solid white;
-        height: 38px; width: 38px; position: absolute;'></div>"""
+        height: 38px; width: 38px; position: absolute;'></div>
+        """
         @obj.appendTo leaf
     $aniArgs =
         u: [{top: '-=40', height: 78},{height: 38}]
