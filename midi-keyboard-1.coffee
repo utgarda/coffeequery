@@ -8,5 +8,5 @@ grow = (square) ->
         square.animate(height: 60, 200).animate height: 30
 nextSquare = (i) ->
   $(next_square_html colors[i]).appendTo( $ '#keyboard' )
-    .click -> grow $(this), 5
+    .click -> grow $(this), 7
 nextSquare i for i in [0..11]
