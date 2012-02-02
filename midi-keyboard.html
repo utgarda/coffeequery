@@ -1,0 +1,45 @@
+<html>
+<head>
+    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <!--<script src='../coffee-script.js'></script>-->
+    <!--<script src='../jquery-1.7.1.min.js'></script>-->
+</head>
+<body>
+
+<div id="palette" style="width: 510px; height: 80px;">
+</div>
+<script type="text/coffeescript">
+colors = [ '#CCDDBB', '#99CC66', '#88AA66'
+                '#AADDCC', '#66AAAA', '#559999'
+                '#FFFFDD', '#FF9922', '#DD8822'
+                '#AACCDD', '#5599CC', '#4477AA' ]
+
+next_square_html = (color) ->
+    """
+    <div style="background: #{color};
+             border: 1px solid grey;
+             height: 30px;
+             width: 30px;
+             margin: 5px;
+             float: left"></div>
+    """
+
+grow = (square, i) ->
+    if i>0 and not square.is ':animated'
+        square.animate height: 60, 200,
+                -> grow square.data().next, i-1
+            .animate height: 30
+
+first = null
+nextSquare = (i) ->
+    current = $(next_square_html colors[i])
+    first ?= current
+    current.appendTo( $ '#palette' )
+        .click ->
+            grow $(this), 7
+        .data 'next', if i < 11 then nextSquare(i+1) else first
+nextSquare 0
+</script>
+</body>
+</html>
