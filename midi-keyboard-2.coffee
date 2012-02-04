@@ -1,9 +1,7 @@
-first = null
-nextSquare = (i) ->
-  current = $(next_square_html colors[i])
-  first ?= current # saving if it is the first one
-  current.appendTo( $ '#keyboard' ) #assembling the keyboard
-    .click ->
-      grow $(this), 7
-    #attach the next one, make it circular
-    .data 'next', if i < 11 then nextSquare(i+1) else first
+squares = ( $j(nextSquareHtml c) for c in colors )
+for s,i in squares
+    s.appendTo( $ '#keyboard' ) #assembling the keyboard
+        .click ->
+            grow $j(this), 7
+         #attach the next one, make it circular
+        .data('next', squares[ (i+1) % squares.length ])

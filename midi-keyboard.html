@@ -5,15 +5,16 @@
 </head>
 <body>
 
-<div id="palette" style="width: 510px; height: 80px;">
+<div id="keyboard" style="width: 510px; height: 80px;">
 </div>
 <script type="text/coffeescript">
-colors = [ '#CCDDBB', '#99CC66', '#88AA66'
-                '#AADDCC', '#66AAAA', '#559999'
-                '#FFFFDD', '#FF9922', '#DD8822'
-                '#AACCDD', '#5599CC', '#4477AA' ]
+$j = jQuery
 
-next_square_html = (color) ->
+colors = [ '#CCDDBB', '#99CC66', '#88AA66',  '#AADDCC'
+           '#66AAAA', '#559999', '#FFFFDD', '#FF9922'
+           '#DD8822', '#AACCDD', '#5599CC', '#4477AA' ]
+
+nextSquareHtml = (color) ->
     """
     <div style="background: #{color};
              border: 1px solid grey;
@@ -29,15 +30,12 @@ grow = (square, i) ->
                 -> grow square.data().next, i-1
             .animate height: 30
 
-first = null
-nextSquare = (i) ->
-    current = $(next_square_html colors[i])
-    first ?= current
-    current.appendTo( $ '#palette' )
+squares = ( $j(nextSquareHtml c) for c in colors )
+for s,i in squares
+    s.appendTo( $j '#keyboard' )
         .click ->
             grow $(this), 7
-        .data 'next', if i < 11 then nextSquare(i+1) else first
-nextSquare 0
+        .data('next', squares[ (i+1) % squares.length ])
 </script>
 </body>
 </html>
