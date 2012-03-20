@@ -1,0 +1,50 @@
+<html>
+<head>
+    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+    <title>My Facebook Login Page</title>
+</head>
+<body>
+<div id="fb-root"></div>
+<script type="text/coffeescript">
+    $j = jQuery
+
+    window.fbAsyncInit = ->
+        FB.init
+            appId: '340097046032196'
+            status: true
+            cookie: true
+            xfbml: true
+            oauth: true
+
+    $j ->
+        id = 'facebook-jssdk'
+        return if $j(id).length > 0
+        sdk = $j.getScript "http://connect.facebook.net/en_US/all.js"
+        sdk.id = id
+        sdk.async = true
+</script>
+<!--<script>-->
+
+
+    <!--window.fbAsyncInit = function() {-->
+        <!--FB.init({-->
+            <!--appId      : '340097046032196',-->
+            <!--status     : true,-->
+            <!--cookie     : true,-->
+            <!--xfbml      : true,-->
+            <!--oauth      : true,-->
+        <!--});-->
+    <!--};-->
+
+
+    <!--(function(d){-->
+        <!--var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}-->
+        <!--js = d.createElement('script'); js.id = id; js.async = true;-->
+        <!--js.src = "//connect.facebook.net/en_US/all.js";-->
+        <!--d.getElementsByTagName('head')[0].appendChild(js);-->
+    <!--}(document));-->
+<!--</script>-->
+<div class="fb-login-button">Login with Facebook</div>
+</body>
+</html>
