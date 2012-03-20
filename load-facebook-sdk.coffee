@@ -2,7 +2,7 @@ $j = jQuery
 
 window.fbAsyncInit = ->
   FB.init
-    appId: '340097046032196'
+    appId: '340097046032196' #put your own appId here
     status: true
     cookie: true
     xfbml: true
