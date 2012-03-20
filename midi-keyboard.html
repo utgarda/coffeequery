@@ -1,0 +1,41 @@
+<html>
+<head>
+    <script src='http://coffeescript.org/extras/coffee-script.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+</head>
+<body>
+
+<div id="keyboard" style="width: 510px; height: 80px;">
+</div>
+<script type="text/coffeescript">
+$j = jQuery
+
+colors = [ '#CCDDBB', '#99CC66', '#88AA66',  '#AADDCC'
+           '#66AAAA', '#559999', '#FFFFDD', '#FF9922'
+           '#DD8822', '#AACCDD', '#5599CC', '#4477AA' ]
+
+nextSquareHtml = (color) ->
+    """
+    <div style="background: #{color};
+             border: 1px solid grey;
+             height: 30px;
+             width: 30px;
+             margin: 5px;
+             float: left"></div>
+    """
+
+grow = (square, i) ->
+    if i>0 and not square.is ':animated'
+        square.animate height: 60, 200,
+                -> grow square.data().next, i-1
+            .animate height: 30
+
+squares = ( $j(nextSquareHtml c) for c in colors )
+for s,i in squares
+    s.appendTo( $j '#keyboard' )
+        .click ->
+            grow $(this), 7
+        .data('next', squares[ (i+1) % squares.length ])
+</script>
+</body>
+</html>
